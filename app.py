@@ -15,7 +15,7 @@ Minimum: 2 colors. Maximum: 6 colors.
 Output format: json array of hexadecimal color.
 Example: ["#F2A900", "#FFDE00", "#D83F67", "#C11B17"]
 
-Input: %s
+Input: %s colors
 
 Output:
 """
