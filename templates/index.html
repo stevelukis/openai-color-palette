@@ -10,29 +10,42 @@
   <div class="color-item" style="background-color: #2b2b2b"><p>#2b2b2b</p></div>
 </div>
 <div class="center">
-  <form>
-    <input type="text" placeholder="Google colors">
+  <form onsubmit="onSubmit(); return false;">
+    <input id="query-input" type="text" placeholder="Google colors">
     <button type="submit">Generate</button>
   </form>
 </div>
 <script>
+    const BASE_URL = "http://127.0.0.1:5000/";
     const colorItemReference = document.querySelector(".color-item");
-
-    const colors = ["#009246", "#FFFFFF", "#CE2B37"];
     const colorList = document.querySelector(".color-list");
 
-    const newColorItems = colors.map(color => {
-        const colorNameElement = document.createElement("p");
-        colorNameElement.innerText = color;
+    const replaceColorItems = (colors) => {
+        const newColorItems = colors.map(color => {
+            const colorNameElement = document.createElement("p");
+            colorNameElement.innerText = color;
 
-        const item = colorItemReference.cloneNode(false);
-        item.style.backgroundColor = color;
-        item.appendChild(colorNameElement);
+            const item = colorItemReference.cloneNode(false);
+            item.style.backgroundColor = color;
+            item.appendChild(colorNameElement);
 
-        return item;
-    })
+            return item;
+        })
 
-    colorList.replaceChildren(...newColorItems);
+        colorList.replaceChildren(...newColorItems);
+    };
+
+    const onSubmit = () => {
+        fetch(BASE_URL + "/palette", {
+            method: "POST",
+            body: JSON.stringify({query: document.querySelector("#query-input").value})
+        })
+            .then(res => res.json())
+            .then(colors => {
+                console.log(colors);
+                replaceColorItems(colors);
+            });
+    };
 </script>
 </body>
 </html>
