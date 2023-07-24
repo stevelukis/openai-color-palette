@@ -1,65 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Color Palette Generator</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-  <script src="https://unpkg.com/@popperjs/core@2"></script>
-  <script src="https://unpkg.com/tippy.js@6"></script>
-</head>
-<body>
-<div class="color-list">
-</div>
-<div class="center">
-  <form onsubmit="onSubmit(); return false;">
-    <input id="query-input" type="text" placeholder="Google colors">
-    <button type="submit">Generate</button>
-  </form>
-</div>
-<script>
-    const BASE_URL = "http://127.0.0.1:5000/";
-    const colorList = document.querySelector(".color-list");
+  <head>
+    <meta charset="UTF-8" />
+    <title>Color Palette Generator</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+  </head>
+  <body>
+    <div class="color-list"></div>
+    <div class="center">
+      <form onsubmit="onSubmit(); return false;">
+        <input id="query-input" type="text" placeholder="Google colors" />
+        <button type="submit">Generate</button>
+      </form>
+    </div>
+    <script>
+      const BASE_URL = "http://127.0.0.1:5000/";
+      const colorList = document.querySelector(".color-list");
 
-    const replaceColorItems = (colors) => {
-        const newColorItems = colors.map(color => {
-            const colorNameElement = document.createElement("p");
-            colorNameElement.innerText = color;
+      const replaceColorItems = (colors) => {
+        const newColorItems = colors.map((color) => {
+          const colorNameElement = document.createElement("p");
+          colorNameElement.innerText = color;
 
-            const item = document.createElement("div");
-            item.className = "color-item";
-            item.style.backgroundColor = color;
-            item.onclick = () => {
-                navigator.clipboard.writeText(color);
-            };
-            item.appendChild(colorNameElement);
+          const item = document.createElement("div");
+          item.className = "color-item";
+          item.style.backgroundColor = color;
+          item.onclick = () => {
+            navigator.clipboard.writeText(color);
+          };
+          item.appendChild(colorNameElement);
 
-
-            return item;
-        })
+          return item;
+        });
 
         tippy(newColorItems, {
-            content: "Copied to clipboard!",
-            trigger: "click",
-            placement: "auto"
-        })
+          content: "Copied to clipboard!",
+          trigger: "click",
+          placement: "auto",
+        });
 
         colorList.replaceChildren(...newColorItems);
-    };
+      };
 
-    const onSubmit = () => {
+      const onSubmit = () => {
         fetch(BASE_URL + "/palette", {
-            method: "POST",
-            body: JSON.stringify({query: document.querySelector("#query-input").value})
+          method: "POST",
+          body: JSON.stringify({
+            query: document.querySelector("#query-input").value,
+          }),
         })
-            .then(res => res.json())
-            .then(colors => {
-                console.log(colors);
-                replaceColorItems(colors);
-            });
-    };
+          .then((res) => res.json())
+          .then((colors) => {
+            console.log(colors);
+            replaceColorItems(colors);
+          });
+      };
 
-    const initialColors = ["#00A5FF", "#2684FF", "#4976FF", "#6A67FF", "#605CEE", "#5751D6"];
-    replaceColorItems(initialColors);
-</script>
-</body>
+      const initialColors = [
+        "#00A5FF",
+        "#2684FF",
+        "#4976FF",
+        "#6A67FF",
+        "#605CEE",
+        "#5751D6",
+      ];
+      replaceColorItems(initialColors);
+    </script>
+  </body>
 </html>
