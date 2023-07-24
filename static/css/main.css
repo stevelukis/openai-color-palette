@@ -32,8 +32,7 @@ html, body {
     border: 0;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    width: 350px;
-    padding: 20px;
+    padding: 0 20px;
     font-size: 16px;
 }
 
@@ -82,4 +81,28 @@ html, body {
 
 .color-item:hover p {
     display: block;
+}
+
+@media only screen and (max-width: 768px) {
+    .input-query input {
+        padding: 0 20px;
+    }
+
+    .input-query button {
+        height: 50px;
+        padding: 0 20px;
+    }
+
+    .color-list {
+        flex-direction: column;
+    }
+
+    .color-item {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .color-item > p {
+        margin: 0;
+    }
 }
