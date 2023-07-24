@@ -3,8 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <title>Color Palette Generator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-  <h1>Hello world</h1>
+<div class="color-list">
+<div class="color-item" style="background-color: #009246"></div>
+<div class="color-item" style="background-color: #FFFFFF"></div>
+<div class="color-item" style="background-color: #CE2B37"></div>
+</div>
+<div class="center">
+  <form>
+    <input type="text" placeholder="Google colors">
+    <button type="submit">Generate</button>
+  </form>
+</div>
+</div>
+<script>
+</script>
 </body>
 </html>
