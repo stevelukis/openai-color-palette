@@ -1,11 +1,42 @@
-from flask import Flask
+import json
+
+import openai
+from flask import Flask, render_template, request, jsonify
+from dotenv import dotenv_values
+
+config = dotenv_values(".env")
+openai.api_key = config["OPENAI_SECRET_KEY"]
 
 app = Flask(__name__, template_folder="templates")
 
+prompt = """"You will create color palettes based on the input.
+Minimum: 2 colors. Maximum: 8 colors.
+
+Output format: json array of hexadecimal color.
+Example: ["#F2A900", "#FFDE00", "#D83F67", "#C11B17"]
+
+Input: %s
+
+Output:
+"""
+
 
 @app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+def index():
+    return render_template("index.html")
+
+
+@app.route("/palette", methods=["POST"])
+def prompt_to_palette():
+    data = json.loads(request.data)
+    query = data['query']
+    response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt=prompt % query,
+        max_tokens=200,
+        stop=["\n"]
+    )
+    return jsonify(response["choices"][0]["text"])
 
 
 if __name__ == '__main__':
