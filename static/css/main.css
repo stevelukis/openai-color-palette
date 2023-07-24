@@ -15,14 +15,41 @@ html, body {
 }
 
 .input-query {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+}
+
+.input-query p {
+    color: white;
+}
+
+.input-query form {
+    display: flex;
+}
+
+.input-query input {
+    border: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 350px;
+    padding: 20px;
+    font-size: 16px;
+}
+
+.input-query input:focus {
+    outline: none;
+}
+
+.input-query button {
+    height: 70px;
+    padding: 0 40px;
+    border: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #9fdbff;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .color-list {
