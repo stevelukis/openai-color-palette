@@ -3,6 +3,9 @@
 openai-color-palette is a web app written with Python and Flask, with a touch of JavaScript for the frontend.
 It works by providing a sentence or keywords, and it will generate color palettes according to the input text.
 
+### Preview
+![preview.gif](readme_images%2Fpreview.gif)
+
 ### Requirements
 
 You need an OpenAI API key to use this web app. [Create an account here](https://platform.openai.com/signup?launch).
