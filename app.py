@@ -10,7 +10,7 @@ openai.api_key = config["OPENAI_SECRET_KEY"]
 app = Flask(__name__, template_folder="templates")
 
 prompt = """"You will create color palettes based on the input.
-Minimum: 2 colors. Maximum: 6 colors.
+The number of colors should be between 2 and 6. Only output the necessary colors.
 
 Output format: json array of hexadecimal color.
 Example: ["#F2A900", "#FFDE00", "#D83F67", "#C11B17"]
