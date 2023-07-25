@@ -39,6 +39,5 @@ def prompt_to_palette():
     return jsonify(json.loads(response["choices"][0]["text"]))
 
 
-
 if __name__ == '__main__':
     app.run()
