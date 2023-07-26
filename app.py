@@ -11,7 +11,8 @@ app = Flask(__name__, template_folder="templates")
 
 messages = [
     {"role": "system",
-     "content": "Create color palettes based on user's input. The number of colors should be between 2 and 6. Reply with JSON array of hexadecimal colors"},
+     "content": "Create color palettes based on user's input. The number of colors should be between 2 and 6. "
+                "Reply with JSON array of hexadecimal colors"},
     {"role": "user", "content": "Google colors"},
     {"role": "assistant", "content": """[ "#4285F4", "#34A853", "#FBBC05", "#EA4335" ]"""}
 ]
